@@ -19,6 +19,6 @@ public class PersonJbdcDao {
 	public List<Person> findAll() {
 		// This will get the resultset and map individual rows to the Person class
 		return jdbcTemplate.query("select * from person", 
-				new BeanPropertyRowMapper(Person.class));
+				new BeanPropertyRowMapper<Person>(Person.class));
 	}
 }
