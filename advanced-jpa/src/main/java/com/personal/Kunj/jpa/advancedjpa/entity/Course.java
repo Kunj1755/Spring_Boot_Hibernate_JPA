@@ -16,6 +16,7 @@ public class Course {
 	protected Course() {
 	}
 
+	
 	// WE want others only to provide the name , not id
 	public Course(String name) {
 		this.name = name;
@@ -31,5 +32,10 @@ public class Course {
 
 	public Long getId() {
 		return id;
+	}
+	// Override toString() to get rid of hashcode being printed
+	@Override
+	public String toString() {
+		return "Course [id=" + id + ", name=" + name + "]";
 	}
 }
