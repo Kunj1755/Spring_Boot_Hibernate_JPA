@@ -4,8 +4,12 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 @Entity
+// NamedQuery is defined on the entity for which it is used
+// JPQL does not use database table to fetch data. It uses entities.
+@NamedQuery(name="find_all_persons", query="select p from Person p")
 public class Person {
 	
 	@Id

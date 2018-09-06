@@ -30,7 +30,7 @@ public class JpaDemoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		logger.info("User id 10001 -> {}", repo.findById(10001));
-		//logger.info("All users -> {}", dao.findAll());
+		logger.info("\n All users -> {}", repo.findAll());
 		
 		 repo.deleteById(10002);
 		 

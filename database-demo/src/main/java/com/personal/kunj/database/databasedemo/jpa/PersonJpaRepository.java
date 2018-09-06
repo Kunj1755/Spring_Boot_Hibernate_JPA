@@ -1,6 +1,9 @@
 package com.personal.kunj.database.databasedemo.jpa;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -14,6 +17,12 @@ public class PersonJpaRepository {
 	//connect to the database
 	@PersistenceContext
 	EntityManager entityManager;
+	
+	public List<Person> findAll() {
+		// createNamedQuery will take 1. Name of the Query 2. What kind of entity it would return
+		TypedQuery<Person> namedQuery = entityManager.createNamedQuery("find_all_persons", Person.class);
+		return namedQuery.getResultList();
+	}
 	
 	public Person findById(int id) {
 		return entityManager.find(Person.class, id);//JPA
