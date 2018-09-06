@@ -32,7 +32,8 @@ public class JpaDemoApplication implements CommandLineRunner {
 		logger.info("User id 10001 -> {}", repo.findById(10001));
 		//logger.info("All users -> {}", dao.findAll());
 		
-		//logger.info("Deleting 10002 -> No of Rows Deleted - {}", dao.deleteById(10002));
+		 repo.deleteById(10002);
+		 
 		// Let hibernate decide the id
 		logger.info("Inserting  -> {}", 
 				repo.insert(new Person("Tara", "Berlin", new Date())));
