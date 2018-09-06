@@ -10,30 +10,32 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.personal.kunj.database.databasedemo.entity.Person;
-import com.personal.kunj.database.databasedemo.jdbc.PersonJbdcDao;
+import com.personal.kunj.database.databasedemo.jpa.PersonJpaRepository;
 
 @SpringBootApplication
-public class DatabaseDemoApplication implements CommandLineRunner {
+public class JpaDemoApplication implements CommandLineRunner {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	
 	@Autowired
-	PersonJbdcDao dao;
+	PersonJpaRepository repo;
 
 	public static void main(String[] args) {
-		SpringApplication.run(DatabaseDemoApplication.class, args);
+		SpringApplication.run(JpaDemoApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		logger.info("All users -> {}", dao.findAll());
-		logger.info("User id 10001 -> {}", dao.findById(10001));
-		logger.info("Deleting 10002 -> No of Rows Deleted - {}", dao.deleteById(10002));
+		
+		logger.info("User id 10001 -> {}", repo.findById(10001));
+		//logger.info("All users -> {}", dao.findAll());
+		
+		/*logger.info("Deleting 10002 -> No of Rows Deleted - {}", dao.deleteById(10002));
 		logger.info("Inserting 10004 -> {}", 
 				dao.insert(new Person(10004, "Tara", "Berlin", new Date())));
 		
 		logger.info("Update 10003 -> {}", 
-				dao.update(new Person(10003, "Pieter", "Utrecht", new Date())));
+				dao.update(new Person(10003, "Pieter", "Utrecht", new Date())));*/
 	}
 }
