@@ -1,6 +1,7 @@
 package com.personal.Kunj.jpa.advancedjpa.repository;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.personal.Kunj.jpa.advancedjpa.AdvancedJpaApplication;
@@ -50,5 +52,14 @@ public class CourseRepositoryTest {
 		assertEquals("JPA in 50 Steps", course.getName());
 
 	}
+	
+	@Test
+	// To reset the database status
+	@DirtiesContext
+	public void deleteById_basic() {
+		repository.deleteById(10002L);
+		assertNull(repository.findById(10002L));
+	}
+	
 
 }
