@@ -35,26 +35,27 @@ public class CourseRepository {
 	}
 
 	public void playWithEntityManager() {
+		
 		Course course1 = new Course("Web Services in 100 Steps");
 		em.persist(course1);
-		// The changes done until that point is sent out to the database
-		em.flush();
-
-		course1.setName("Web Services in 100 Steps - Updated");
-		em.flush();
-		
 		Course course2 = new Course("Angular JS in 100 Steps");
-		em.persist(course2);
+		em.persist(course2);	
+		
 		em.flush();
 		
-		// Let's say I do not want course2 changes to be going to the database after this step.
-		// The changes to course2 will no longer be tracked after this stage
-		//em.detach(course2);
-		
-		// The other way of detaching the entity is by clearing everything up. This will clear everything that is there in the EntityManager.
-		em.clear();
-		
+		course1.setName("Web Services in 100 Steps - Updated");
 		course2.setName("Angular Js in 100 Steps - Updated");
+		
+		/*
+		 * Refresh course1 with the content that is there in the database. Take
+		 * course1 details as it is in the database. I do not want the updated data of
+		 * course1 to go through.
+		 */
+		em.refresh(course1);;
+		
+		// Only course2 changes will go the database
 		em.flush();
+				
 	}
+	
 }
