@@ -2,8 +2,11 @@ package com.personal.Kunj.jpa.advancedjpa.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+// To define the name of the table
+@Table(name="CourseDetails")
 public class Course {
 
 	// To define primary key
