@@ -25,7 +25,7 @@ public class AdvancedJpaApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		repo.playWithEntityManager();
+	//	repo.playWithEntityManager();
 		
 		/*Course course = repo.findById(10001L);
 		logger.info("Course 10001 -> {}",course);*/

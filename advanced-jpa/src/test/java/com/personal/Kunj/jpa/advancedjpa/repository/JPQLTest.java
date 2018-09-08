@@ -35,9 +35,15 @@ public class JPQLTest {
 	@Test
 	public void jpql_typed() {
 		
-		// Returning a Course back. typed queries are always better as they make your program clear
-		TypedQuery<Course> query = 
-					em.createQuery("Select  c  From Course c", Course.class);
+		/*
+		 * Here we are hard coding the query. If we need to use the same query again, 
+		 * we need to write the query again. @NamedQuery can help us here where we can give
+		 * name to a query.
+		 * 
+		 * @NamedQuery is always defined on the entity class to which it is directed.
+		 */
+		//TypedQuery<Course> query = em.createQuery("Select  c  From Course c", Course.class);
+		TypedQuery<Course> query = em.createNamedQuery("query_get_all_courses", Course.class);
 		
 		List<Course> resultList = query.getResultList();	
 		logger.info("Select  c  From Course c -> {}",resultList);
@@ -46,7 +52,7 @@ public class JPQLTest {
 	@Test
 	public void jpql_where() {
 		TypedQuery<Course> query = 
-					em.createQuery("Select  c  From Course c where name like '%100 Steps'", Course.class);
+					em.createNamedQuery("query_get_100_step_courses", Course.class);
 		
 		List<Course> resultList = query.getResultList();
 		
