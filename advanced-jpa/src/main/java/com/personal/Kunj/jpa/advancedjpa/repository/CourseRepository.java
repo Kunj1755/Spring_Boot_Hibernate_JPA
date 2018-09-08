@@ -33,22 +33,28 @@ public class CourseRepository {
 		Course course = findById(id);
 		em.remove(course);
 	}
-	
+
 	public void playWithEntityManager() {
-		Course course = new Course("Web Services in 100 Steps");
-		// persist() is used to create a new entity
-		em.persist(course);
-		/*
-		 * An update query is fired bcz of the below statement without even asking for a
-		 * save. HOW?
-		 * 
-		 * BCZ OF @Transactional annotation, this entire method is in a
-		 * single transaction. And while we are within the scope of a transaction,
-		 * EntityManager keeps track of all the things that were updated/modified
-		 * through it. In this example Course is updated/inserted through the
-		 * EntityManager. So changes made to the course are tracked by the
-		 * EntityManager.
-		 */
-		course.setName("Web Services in 100 Steps - Updated");
+		Course course1 = new Course("Web Services in 100 Steps");
+		em.persist(course1);
+		// The changes done until that point is sent out to the database
+		em.flush();
+
+		course1.setName("Web Services in 100 Steps - Updated");
+		em.flush();
+		
+		Course course2 = new Course("Angular JS in 100 Steps");
+		em.persist(course2);
+		em.flush();
+		
+		// Let's say I do not want course2 changes to be going to the database after this step.
+		// The changes to course2 will no longer be tracked after this stage
+		//em.detach(course2);
+		
+		// The other way of detaching the entity is by clearing everything up. This will clear everything that is there in the EntityManager.
+		em.clear();
+		
+		course2.setName("Angular Js in 100 Steps - Updated");
+		em.flush();
 	}
 }
