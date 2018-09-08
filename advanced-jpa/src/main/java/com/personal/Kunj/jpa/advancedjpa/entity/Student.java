@@ -21,6 +21,14 @@ public class Student {
 	protected Student() {
 	}
 
+	public Passport getPassport() {
+		return passport;
+	}
+
+	public void setPassport(Passport passport) {
+		this.passport = passport;
+	}
+
 	public Student(String name) {
 		this.name = name;
 	}

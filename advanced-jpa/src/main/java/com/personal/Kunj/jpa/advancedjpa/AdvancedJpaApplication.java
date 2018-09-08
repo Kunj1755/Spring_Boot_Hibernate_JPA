@@ -9,14 +9,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.personal.Kunj.jpa.advancedjpa.entity.Course;
 import com.personal.Kunj.jpa.advancedjpa.repository.CourseRepository;
+import com.personal.Kunj.jpa.advancedjpa.repository.StudentRepository;
 
 @SpringBootApplication
-public class AdvancedJpaApplication implements CommandLineRunner{
-	
-	private Logger logger=LoggerFactory.getLogger(this.getClass());
-	
+public class AdvancedJpaApplication implements CommandLineRunner {
+
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	private CourseRepository repo;
+
+	@Autowired
+	private StudentRepository studentRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(AdvancedJpaApplication.class, args);
@@ -24,14 +28,7 @@ public class AdvancedJpaApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		
-	//	repo.playWithEntityManager();
-		
-		/*Course course = repo.findById(10001L);
-		logger.info("Course 10001 -> {}",course);*/
-		//repo.deleteById(10001L);
-		// Hibernate will automatically generate id
-		//repo.save(new Course("Microservices in 100 Steps"));
+		studentRepo.saveStudentWithPassport();
+
 	}
 }
-
