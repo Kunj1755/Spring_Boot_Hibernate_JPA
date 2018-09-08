@@ -1,9 +1,14 @@
 package com.personal.Kunj.jpa.advancedjpa.entity;
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 // To define the name of the table
@@ -18,6 +23,14 @@ public class Course {
 	// Set all the constraints here that you have in your data in dB to prevent bad data from entering into DB
 	@Column(name="fullname", nullable=false)
 	private String name;
+	
+	@UpdateTimestamp
+	private LocalDateTime lastUpdatedDate;
+	
+	@CreationTimestamp
+	private LocalDateTime createdDate;
+	
+	
 	// Default constructor will be used by JPA to create bean
 	protected Course() {
 	}
