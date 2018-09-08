@@ -29,6 +29,7 @@ public class AdvancedJpaApplication implements CommandLineRunner{
 		logger.info("Course 10001 -> {}",course);
 		//repo.deleteById(10001L);
 		// Hibernate will automatically generate id
-		repo.save(new Course("Microservices in 100 Steps"));
+		//repo.save(new Course("Microservices in 100 Steps"));
 	}
 }
+
