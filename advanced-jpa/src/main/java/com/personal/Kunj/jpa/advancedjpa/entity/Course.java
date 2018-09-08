@@ -1,4 +1,5 @@
 package com.personal.Kunj.jpa.advancedjpa.entity;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,6 +15,8 @@ public class Course {
 	@GeneratedValue // want JPA to generate for us
 	private Long id;
 
+	// Set all the constraints here that you have in your data in dB to prevent bad data from entering into DB
+	@Column(name="fullname", nullable=false)
 	private String name;
 	// Default constructor will be used by JPA to create bean
 	protected Course() {

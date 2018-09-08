@@ -37,25 +37,10 @@ public class CourseRepository {
 	public void playWithEntityManager() {
 		
 		Course course1 = new Course("Web Services in 100 Steps");
-		em.persist(course1);
-		Course course2 = new Course("Angular JS in 100 Steps");
-		em.persist(course2);	
+		em.persist(course1); 
 		
-		em.flush();
-		
-		course1.setName("Web Services in 100 Steps - Updated");
-		course2.setName("Angular Js in 100 Steps - Updated");
-		
-		/*
-		 * Refresh course1 with the content that is there in the database. Take
-		 * course1 details as it is in the database. I do not want the updated data of
-		 * course1 to go through.
-		 */
-		em.refresh(course1);;
-		
-		// Only course2 changes will go the database
-		em.flush();
-				
+		course1.setName(null);
+						
 	}
 	
 }
