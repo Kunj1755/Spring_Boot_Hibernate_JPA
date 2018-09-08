@@ -15,7 +15,7 @@ public class Student {
 	@Column(nullable = false)
 	private String name;
 	
-	@OneToOne
+	@OneToOne // one to one relationship from student to passport
 	private Passport passport;
 
 	protected Student() {
