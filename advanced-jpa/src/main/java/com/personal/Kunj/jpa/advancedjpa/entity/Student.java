@@ -16,7 +16,7 @@ public class Student {
 	@Column(nullable = false)
 	private String name;
 	
-	@OneToOne(fetch=FetchType.LAZY) // one to one relationship from student to passport
+	@OneToOne(fetch=FetchType.LAZY) 
 	private Passport passport;
 
 	protected Student() {
