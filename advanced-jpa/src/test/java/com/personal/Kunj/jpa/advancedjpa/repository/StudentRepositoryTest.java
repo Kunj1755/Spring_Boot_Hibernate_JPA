@@ -32,22 +32,15 @@ public class StudentRepositoryTest {
 		//Transaction
 		
 		@Test
-		@Transactional
+		// Let us remove @Transactional and move the method body to a new method in StudentRepository.java
+	/*
+	 * After removing @Transactional, the transaction support will be provided by
+	 * StudentRepository.java and all the queries in
+	 * someOperationToUnderstandPersistenceContext() will run fine.
+	 */
+		//@Transactional
 		public void someTest() {
-			//Database Operation 1 - Retrieve student
-			Student student = em.find(Student.class, 20001L);
-						
-			
-			//Database Operation 2 - Retrieve passport
-			// As we already have student object, we are not using EntityManager to get data.
-			
-			Passport passport = student.getPassport();
-
-			//Database Operation 3 - update passport
-			passport.setNumber("E123457");
-			
-			//Database Operation 4 - update student
-			student.setName("Ranga - updated");
+			repository.someOperationToUnderstandPersistenceContext();
 		}
 
 	@Test
