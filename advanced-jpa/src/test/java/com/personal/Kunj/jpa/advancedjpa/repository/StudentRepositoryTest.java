@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.personal.Kunj.jpa.advancedjpa.AdvancedJpaApplication;
+import com.personal.Kunj.jpa.advancedjpa.entity.Passport;
 import com.personal.Kunj.jpa.advancedjpa.entity.Student;
 
 
@@ -25,6 +26,29 @@ public class StudentRepositoryTest {
 	
 	@Autowired
 	EntityManager em;
+	
+		//Session & Session Factory
+		//EntityManager & Persistence Context
+		//Transaction
+		
+		@Test
+		@Transactional
+		public void someTest() {
+			//Database Operation 1 - Retrieve student
+			Student student = em.find(Student.class, 20001L);
+						
+			
+			//Database Operation 2 - Retrieve passport
+			// As we already have student object, we are not using EntityManager to get data.
+			
+			Passport passport = student.getPassport();
+
+			//Database Operation 3 - update passport
+			passport.setNumber("E123457");
+			
+			//Database Operation 4 - update student
+			student.setName("Ranga - updated");
+		}
 
 	@Test
 	/*
