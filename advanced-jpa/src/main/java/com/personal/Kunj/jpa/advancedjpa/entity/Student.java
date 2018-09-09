@@ -1,6 +1,7 @@
 package com.personal.Kunj.jpa.advancedjpa.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -15,7 +16,7 @@ public class Student {
 	@Column(nullable = false)
 	private String name;
 	
-	@OneToOne // one to one relationship from student to passport
+	@OneToOne(fetch=FetchType.LAZY) // one to one relationship from student to passport
 	private Passport passport;
 
 	protected Student() {

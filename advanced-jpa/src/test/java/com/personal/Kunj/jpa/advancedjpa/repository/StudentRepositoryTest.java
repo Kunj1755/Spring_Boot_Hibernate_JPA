@@ -26,11 +26,16 @@ public class StudentRepositoryTest {
 	@Autowired
 	EntityManager em;
 
-	
-
 	@Test
+	/*
+	 * If @Transactional is not here, student.getPassport() will throw below
+	 * exception in case of lazy fetch: 
+	 * org.hibernate.LazyInitializationException: could not initialize proxy
+	 * [com.personal.Kunj.jpa.advancedjpa.entity.Passport#40001] - no Session
+	 */
 	@Transactional
 	public void retrieveStudentAndPassportDetails() {
+		
 		Student student = em.find(Student.class, 20001L);
 		logger.info("student -> {}", student);
 		logger.info("passport -> {}",student.getPassport());
