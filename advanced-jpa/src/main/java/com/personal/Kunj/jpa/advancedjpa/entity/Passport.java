@@ -16,6 +16,11 @@ public class Passport {
 	@Column(nullable = false)
 	private String number;
 	
+	/*
+	 * Even though there is no studnt_id column associated with passport, this gives
+	 * us a way to navigate from passport to student. This is Bidirectional
+	 * relationship
+	 */ 
 	@OneToOne(fetch=FetchType.LAZY, mappedBy="passport") 
 	private Student student;
 
