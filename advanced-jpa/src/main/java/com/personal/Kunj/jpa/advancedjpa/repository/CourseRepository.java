@@ -1,5 +1,7 @@
 package com.personal.Kunj.jpa.advancedjpa.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
@@ -50,7 +52,7 @@ public class CourseRepository {
 						
 	}
 
-	public void addReviewsForCourse() {
+	public void addHardcodedReviewsForCourse() {
 		//get the course 10003
 		Course course = findById(10003L);
 		logger.info("course.getReviews() -> {}", course.getReviews());
@@ -69,6 +71,19 @@ public class CourseRepository {
 		//save it to the database. Mind here that we are only persisting Review, not course
 		em.persist(review1);
 		em.persist(review2);
+	}
+	
+	public void addReviewsForCourse(Long courseId, List<Review> reviews) {		
+		Course course = findById(courseId);
+		logger.info("course.getReviews() -> {}", course.getReviews());
+		for(Review review:reviews)
+		{			
+			//setting the relationship
+			course.addReview(review);
+			review.setCourse(course);
+			// Only persisting the review, not the course
+			em.persist(review);
+		}
 	}
 	
 }

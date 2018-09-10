@@ -1,5 +1,8 @@
 package com.personal.Kunj.jpa.advancedjpa;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.personal.Kunj.jpa.advancedjpa.entity.Course;
+import com.personal.Kunj.jpa.advancedjpa.entity.Review;
 import com.personal.Kunj.jpa.advancedjpa.repository.CourseRepository;
 import com.personal.Kunj.jpa.advancedjpa.repository.StudentRepository;
 
@@ -28,7 +31,13 @@ public class AdvancedJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		repo.addReviewsForCourse();
+		//repo.addHardcodedReviewsForCourse();
+		List<Review> reviews = new ArrayList<>();
+		
+		reviews.add(new Review("5", "Great Hands-on Stuff."));	
+		reviews.add(new Review("5", "Hatsoff."));
+
+		repo.addReviewsForCourse(10003L, reviews );	
 
 	}
 }
