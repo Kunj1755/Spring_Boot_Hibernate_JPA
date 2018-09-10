@@ -1,11 +1,13 @@
 package com.personal.Kunj.jpa.advancedjpa.entity;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,8 +23,26 @@ public class Course {
 	@Column(name="fullname", nullable=false)
 	private String name;
 	
+	@UpdateTimestamp
+	private LocalDateTime lastUpdatedDate;
+	
+	@CreationTimestamp
+	private LocalDateTime createdDate;
+	
 	@OneToMany(mappedBy="course")
-	private List<Review> reviews;
+	private List<Review> reviews = new ArrayList<>();
+	
+	@ManyToMany
+	private List<Student> students = new ArrayList<>();
+	
+	// Default constructor will be used by JPA to create bean
+		protected Course() {
+		}
+
+		// We want others only to provide the name , not id
+		public Course(String name) {
+			this.name = name;
+		}
 	
 	public List<Review> getReviews() {
 		return reviews;
@@ -41,24 +61,14 @@ public class Course {
 	public void removeReview(Review review) {
 		this.reviews.remove(review);
 	}
-	
-	@UpdateTimestamp
-	private LocalDateTime lastUpdatedDate;
-	
-	@CreationTimestamp
-	private LocalDateTime createdDate;
-	
-	
-	// Default constructor will be used by JPA to create bean
-	protected Course() {
+	public List<Student> getStudents() {
+		return students;
 	}
 
-	
-	// WE want others only to provide the name , not id
-	public Course(String name) {
-		this.name = name;
+	public void addStudent(Student student) {
+		this.students.add(student);
 	}
-
+	
 	public String getName() {
 		return name;
 	}
