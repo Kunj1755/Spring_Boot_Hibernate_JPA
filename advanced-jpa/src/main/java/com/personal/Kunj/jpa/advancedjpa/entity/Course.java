@@ -1,13 +1,12 @@
 package com.personal.Kunj.jpa.advancedjpa.entity;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -21,6 +20,27 @@ public class Course {
 
 	@Column(name="fullname", nullable=false)
 	private String name;
+	
+	@OneToMany(mappedBy="course")
+	private List<Review> reviews;
+	
+	public List<Review> getReviews() {
+		return reviews;
+	}
+	
+	/*
+	 * I do not want others to set reviews. I want others to add one review at a
+	 * time.I do not want somebody to take the list of the revies and manipulate it
+	 * and then give me the complete list.
+	 */ 
+
+	public void addReview(Review review) {
+		this.reviews.add(review);
+	}
+	
+	public void removeReview(Review review) {
+		this.reviews.remove(review);
+	}
 	
 	@UpdateTimestamp
 	private LocalDateTime lastUpdatedDate;
