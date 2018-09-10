@@ -3,6 +3,8 @@ package com.personal.Kunj.jpa.advancedjpa.repository;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import javax.persistence.EntityManager;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -11,9 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.personal.Kunj.jpa.advancedjpa.AdvancedJpaApplication;
 import com.personal.Kunj.jpa.advancedjpa.entity.Course;
+import com.personal.Kunj.jpa.advancedjpa.entity.Review;
 
 // Used to launch SpringContext in unit test
 @RunWith(SpringRunner.class)
@@ -30,6 +34,9 @@ public class CourseRepositoryTest {
 
 	@Autowired
 	CourseRepository repository;
+	
+	@Autowired
+	EntityManager em;
 
 	/*
 	 * If we do right clock on contextLoads(), it will launch the entire context, ie
@@ -85,5 +92,25 @@ public class CourseRepositoryTest {
 		repository.playWithEntityManager();
 	}
 	
+	// Test for @OneToMany side o the relationship
+	@Test
+	@Transactional // In the below method by default Lazy fetch will take place
+	// by default on @OneToMany side of the relationship, fetch strategy is Lazy
+	// In every @OneToMany side of the relationship, you have to decide which type of fetching you want to go for
+	
+	public void retrieveReviewsForCourse() {
+		Course course = repository.findById(10001L);
+		// The below statement will throw "exception" if we do not have @Transactional
+		logger.info("{}",course.getReviews());
+	}
+	// Test for @ManyToOne side o the relationship
+	@Test
+	@Transactional
+	
+	public void retrieveCourseForReview() {
+		// On the @ManyToOne side of the relationship The fetching is always EAGER
+		Review review = em.find(Review.class, 50001L);
+		logger.info("{}",review.getCourse());
+	}
 
 }
