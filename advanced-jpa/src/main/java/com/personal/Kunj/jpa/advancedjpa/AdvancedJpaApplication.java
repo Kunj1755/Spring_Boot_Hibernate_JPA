@@ -10,7 +10,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.personal.Kunj.jpa.advancedjpa.entity.Course;
 import com.personal.Kunj.jpa.advancedjpa.entity.Review;
+import com.personal.Kunj.jpa.advancedjpa.entity.Student;
 import com.personal.Kunj.jpa.advancedjpa.repository.CourseRepository;
 import com.personal.Kunj.jpa.advancedjpa.repository.StudentRepository;
 
@@ -31,13 +33,17 @@ public class AdvancedJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		studentRepo.insertHardcodedStudentAndCourse();
+		
 		//repo.addHardcodedReviewsForCourse();
-		List<Review> reviews = new ArrayList<>();
+		/*List<Review> reviews = new ArrayList<>();
 		
 		reviews.add(new Review("5", "Great Hands-on Stuff."));	
 		reviews.add(new Review("5", "Hatsoff."));
 
-		repo.addReviewsForCourse(10003L, reviews );	
-
+		repo.addReviewsForCourse(10003L, reviews );	*/
+		studentRepo.insertStudentAndCourse(new Student("Jack"), 
+				new Course("Microservices in 100 Steps"));
 	}
 }

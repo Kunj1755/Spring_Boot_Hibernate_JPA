@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.personal.Kunj.jpa.advancedjpa.entity.Course;
 import com.personal.Kunj.jpa.advancedjpa.entity.Passport;
 import com.personal.Kunj.jpa.advancedjpa.entity.Student;
 
@@ -96,6 +97,27 @@ public class StudentRepository {
 		// Database Operation 4 - update student
 		student.setName("Ranga - updated");
 		// Persistence Context (student++ , passport++)
+	}
+	
+	public void insertHardcodedStudentAndCourse(){
+		Student student = new Student("Jack");
+		Course course = new Course("Microservices in 100 Steps");
+		em.persist(student);
+		em.persist(course);
+		
+		// Persisting the relationship between student and course
+		student.addCourse(course);
+		course.addStudent(student);
+		em.persist(student); // Persisting the owning side
+	}
+	
+	public void insertStudentAndCourse(Student student, Course course){
+		
+		student.addCourse(course);
+		course.addStudent(student);
+
+		em.persist(student);
+		em.persist(course);
 	}
 
 }
