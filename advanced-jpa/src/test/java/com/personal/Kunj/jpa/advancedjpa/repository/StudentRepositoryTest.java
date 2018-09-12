@@ -1,6 +1,6 @@
 package com.personal.Kunj.jpa.advancedjpa.repository;
-import javax.persistence.EntityManager;
 
+import javax.persistence.EntityManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.personal.Kunj.jpa.advancedjpa.AdvancedJpaApplication;
 import com.personal.Kunj.jpa.advancedjpa.entity.Passport;
 import com.personal.Kunj.jpa.advancedjpa.entity.Student;
-
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AdvancedJpaApplication.class)
@@ -64,4 +63,17 @@ public class StudentRepositoryTest {
 		logger.info("passport -> {}", passport);
 		logger.info("student -> {}", passport.getStudent());
 	}
+	
+	@Test
+	@Transactional
+	public void retrieveStudentAndCourses() {
+		// Executes only the student query (Lazy fetch)
+		// ManyToMany by default uses lazy fetch
+		Student student = em.find(Student.class, 20001L);
+		
+		logger.info("student -> {}", student);
+		// It will run join query on student_course and course table
+		logger.info("courses -> {}", student.getCourses());
+	}
+	
 }
