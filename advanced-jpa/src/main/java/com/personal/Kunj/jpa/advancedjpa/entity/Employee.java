@@ -1,14 +1,18 @@
 package com.personal.Kunj.jpa.advancedjpa.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+// Employee is a mapped super class which is present just for the sake of mapping.
+@MappedSuperclass
+/*
+ * When a class is a mapped super class, it cannot be an entity. There will not
+ * be any table for this class.
+ */
+// @Entity
+// @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Employee {
 
 	@Id

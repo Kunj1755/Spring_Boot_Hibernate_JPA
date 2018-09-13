@@ -1,8 +1,6 @@
 package com.personal.Kunj.jpa.advancedjpa;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,11 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.personal.Kunj.jpa.advancedjpa.entity.Course;
 import com.personal.Kunj.jpa.advancedjpa.entity.FullTimeEmployee;
 import com.personal.Kunj.jpa.advancedjpa.entity.PartTimeEmployee;
-import com.personal.Kunj.jpa.advancedjpa.entity.Review;
-import com.personal.Kunj.jpa.advancedjpa.entity.Student;
 import com.personal.Kunj.jpa.advancedjpa.repository.CourseRepository;
 import com.personal.Kunj.jpa.advancedjpa.repository.EmployeeRepository;
 import com.personal.Kunj.jpa.advancedjpa.repository.StudentRepository;
@@ -30,7 +25,7 @@ public class AdvancedJpaApplication implements CommandLineRunner {
 
 	@Autowired
 	private StudentRepository studentRepo;
-	
+
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
@@ -40,23 +35,26 @@ public class AdvancedJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		
-		studentRepo.insertHardcodedStudentAndCourse();
-		
-		//repo.addHardcodedReviewsForCourse();
-		/*List<Review> reviews = new ArrayList<>();
-		
-		reviews.add(new Review("5", "Great Hands-on Stuff."));	
-		reviews.add(new Review("5", "Hatsoff."));
 
-		repo.addReviewsForCourse(10003L, reviews );	
-		studentRepo.insertStudentAndCourse(new Student("Jack"), 
-				new Course("Microservices in 100 Steps"));*/
-		
+		studentRepo.insertHardcodedStudentAndCourse();
+
+		// repo.addHardcodedReviewsForCourse();
+		/*
+		 * List<Review> reviews = new ArrayList<>();
+		 * 
+		 * reviews.add(new Review("5", "Great Hands-on Stuff.")); reviews.add(new
+		 * Review("5", "Hatsoff."));
+		 * 
+		 * repo.addReviewsForCourse(10003L, reviews );
+		 * studentRepo.insertStudentAndCourse(new Student("Jack"), new
+		 * Course("Microservices in 100 Steps"));
+		 */
+
 		employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal("50")));
 		employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
 
-		logger.info("All Employees -> {}", employeeRepository.retrieveAllEmployees());
-		
+		logger.info("All Employees -> {}", employeeRepository.retrieveAllFullTimeEmployees());
+		logger.info("All Employees -> {}", employeeRepository.retrieveAllPartTimeEmployees());
+
 	}
 }
