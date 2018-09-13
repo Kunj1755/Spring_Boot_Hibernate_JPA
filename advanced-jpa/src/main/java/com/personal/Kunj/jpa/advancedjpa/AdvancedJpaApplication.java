@@ -1,7 +1,5 @@
 package com.personal.Kunj.jpa.advancedjpa;
 
-import java.math.BigDecimal;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.personal.Kunj.jpa.advancedjpa.entity.FullTimeEmployee;
-import com.personal.Kunj.jpa.advancedjpa.entity.PartTimeEmployee;
 import com.personal.Kunj.jpa.advancedjpa.repository.CourseRepository;
 import com.personal.Kunj.jpa.advancedjpa.repository.EmployeeRepository;
 import com.personal.Kunj.jpa.advancedjpa.repository.StudentRepository;
@@ -50,11 +46,16 @@ public class AdvancedJpaApplication implements CommandLineRunner {
 		 * Course("Microservices in 100 Steps"));
 		 */
 
-		employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal("50")));
-		employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
-
-		logger.info("All Employees -> {}", employeeRepository.retrieveAllFullTimeEmployees());
-		logger.info("All Employees -> {}", employeeRepository.retrieveAllPartTimeEmployees());
+		/*
+		 * employeeRepository.insert(new PartTimeEmployee("Jill", new
+		 * BigDecimal("50"))); employeeRepository.insert(new FullTimeEmployee("Jack",
+		 * new BigDecimal("10000")));
+		 * 
+		 * logger.info("All Employees -> {}",
+		 * employeeRepository.retrieveAllFullTimeEmployees());
+		 * logger.info("All Employees -> {}",
+		 * employeeRepository.retrieveAllPartTimeEmployees());
+		 */
 
 	}
 }
