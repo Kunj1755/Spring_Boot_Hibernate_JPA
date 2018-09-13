@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.personal.Kunj.jpa.advancedjpa.entity.Course;
 
+// Not a eecommended way for the production
+@RepositoryRestResource(path = "course")
 public interface CourseSpringDataRepository extends JpaRepository<Course, Long> {
 	// Defining custom methods
 	// Methods can start with find/retrieve/query for select statements
