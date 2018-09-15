@@ -13,17 +13,22 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Cacheable
+// On the delete of a row I want this SQL to be called
+@SQLDelete(sql = "update course set is_deleted=true where id=?")
+@Where(clause = "is_deleted = false")
 public class Course {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 
-	@Column(name = "fullname", nullable = false)
+	@Column(nullable = false)
 	private String name;
 
 	@UpdateTimestamp
@@ -37,6 +42,8 @@ public class Course {
 
 	@ManyToMany(mappedBy = "courses")
 	private List<Student> students = new ArrayList<>();
+
+	private boolean isDeleted;
 
 	// Default constructor will be used by JPA to create bean
 	protected Course() {
