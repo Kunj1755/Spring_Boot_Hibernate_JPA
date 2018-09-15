@@ -11,11 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Entity
 @Cacheable
@@ -23,6 +26,8 @@ import org.hibernate.annotations.Where;
 @SQLDelete(sql = "update course set is_deleted=true where id=?")
 @Where(clause = "is_deleted = false")
 public class Course {
+
+	private static Logger LOGGER = LoggerFactory.getLogger(Course.class);
 
 	@Id
 	@GeneratedValue
@@ -44,6 +49,12 @@ public class Course {
 	private List<Student> students = new ArrayList<>();
 
 	private boolean isDeleted;
+
+	@PreRemove
+	private void preRemove() {
+		LOGGER.info("Setting isDeleted to True");
+		this.isDeleted = true;
+	}
 
 	// Default constructor will be used by JPA to create bean
 	protected Course() {
