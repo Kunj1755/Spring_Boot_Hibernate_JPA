@@ -12,13 +12,14 @@ import org.springframework.stereotype.Repository;
 
 import com.personal.Kunj.jpa.advancedjpa.entity.Course;
 import com.personal.Kunj.jpa.advancedjpa.entity.Review;
+import com.personal.Kunj.jpa.advancedjpa.entity.ReviewRating;
 
 @Repository
 @Transactional
 public class CourseRepository {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired
 	EntityManager em;
 
@@ -43,47 +44,47 @@ public class CourseRepository {
 	}
 
 	public void playWithEntityManager() {
-		
+
 		Course course1 = new Course("Web Services in 100 Steps");
-		em.persist(course1); 
-		
-		Course course2 =findById(10001L);
+		em.persist(course1);
+
+		Course course2 = findById(10001L);
 		course2.setName("JPA in 50 Steps - Updated");
-						
+
 	}
 
 	public void addHardcodedReviewsForCourse() {
-		//get the course 10003
+		// get the course 10003
 		Course course = findById(10003L);
 		logger.info("course.getReviews() -> {}", course.getReviews());
-		
-		//add 2 reviews to it
-		Review review1 = new Review("5", "Great Hands-on Stuff.");	
-		Review review2 = new Review("5", "Hatsoff.");
-		
-		//setting the relationship
+
+		// add 2 reviews to it
+		Review review1 = new Review(ReviewRating.FIVE, "Great Hands-on Stuff.");
+		Review review2 = new Review(ReviewRating.FIVE, "Hatsoff.");
+
+		// setting the relationship
 		course.addReview(review1);
 		review1.setCourse(course);
-		
+
 		course.addReview(review2);
 		review2.setCourse(course);
-		
-		//save it to the database. Mind here that we are only persisting Review, not course
+
+		// save it to the database. Mind here that we are only persisting Review, not
+		// course
 		em.persist(review1);
 		em.persist(review2);
 	}
-	
-	public void addReviewsForCourse(Long courseId, List<Review> reviews) {		
+
+	public void addReviewsForCourse(Long courseId, List<Review> reviews) {
 		Course course = findById(courseId);
 		logger.info("course.getReviews() -> {}", course.getReviews());
-		for(Review review:reviews)
-		{			
-			//setting the relationship
+		for (Review review : reviews) {
+			// setting the relationship
 			course.addReview(review);
 			review.setCourse(course);
 			// Only persisting the review, not the course
 			em.persist(review);
 		}
 	}
-	
+
 }
